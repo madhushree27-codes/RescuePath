@@ -1,0 +1,58 @@
+{
+  "networkId": "davanagere-corridor-v1",
+  "name": "Davanagere District Regional Emergency Road Network",
+  "bounds": {
+    "minLat": 14.4200,
+    "maxLat": 14.5100,
+    "minLng": 75.8800,
+    "maxLng": 75.9700
+  },
+  "nodes": [
+    { "id": "DVG-GMIT-01", "name": "GMIT Campus / Karur Industrial Area", "lat": 14.4644, "lng": 75.9218, "type": "station" },
+    { "id": "DVG-PB-02", "name": "PB Road / Toll Gate Junction", "lat": 14.4610, "lng": 75.9180, "type": "junction" },
+    { "id": "DVG-HAD-03", "name": "Hadadi Road Circle", "lat": 14.4580, "lng": 75.9150, "type": "junction" },
+    { "id": "DVG-MCC-04", "name": "MCC B Block / Kuvempu Nagar", "lat": 14.4680, "lng": 75.9100, "type": "junction" },
+    { "id": "DVG-BAP-05", "name": "Bapuji Hospital Emergency Entrance", "lat": 14.4720, "lng": 75.9080, "type": "hospital_access" },
+    { "id": "DVG-SSIMS-06", "name": "SSIMS & RC Hospital NH-48 Entrance", "lat": 14.4850, "lng": 75.8920, "type": "hospital_access" },
+    { "id": "DVG-CHIG-07", "name": "Chigateri District Hospital Entrance", "lat": 14.4530, "lng": 75.9230, "type": "hospital_access" },
+    { "id": "DVG-CITY-08", "name": "City Central Hospital Mandipet", "lat": 14.4625, "lng": 75.9250, "type": "hospital_access" },
+    { "id": "DVG-HEART-09", "name": "Davanagere Heart & Brain Center PJ Ext", "lat": 14.4650, "lng": 75.9140, "type": "hospital_access" },
+    { "id": "DVG-PJ-10", "name": "PJ Extension Main Road Junction", "lat": 14.4640, "lng": 75.9160, "type": "junction" },
+    { "id": "DVG-NH48-11", "name": "NH-48 Bypass Flyover Junction", "lat": 14.4780, "lng": 75.8980, "type": "flyover" },
+    { "id": "DVG-VID-12", "name": "Vidyanagar Main Road", "lat": 14.4550, "lng": 75.9050, "type": "junction" }
+  ],
+  "edges": [
+    { "id": "DE01", "from": "DVG-GMIT-01", "to": "DVG-PB-02", "roadName": "PB Road East", "lengthMeters": 850, "freeFlowSpeedKmh": 50, "lanes": 4, "roadClass": "arterial" },
+    { "id": "DE02", "from": "DVG-PB-02", "to": "DVG-GMIT-01", "roadName": "PB Road East", "lengthMeters": 850, "freeFlowSpeedKmh": 50, "lanes": 4, "roadClass": "arterial" },
+
+    { "id": "DE03", "from": "DVG-PB-02", "to": "DVG-HAD-03", "roadName": "Hadadi Road", "lengthMeters": 700, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+    { "id": "DE04", "from": "DVG-HAD-03", "to": "DVG-PB-02", "roadName": "Hadadi Road", "lengthMeters": 700, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+
+    { "id": "DE05", "from": "DVG-HAD-03", "to": "DVG-VID-12", "roadName": "Hadadi to Vidyanagar Link", "lengthMeters": 1100, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+    { "id": "DE06", "from": "DVG-VID-12", "to": "DVG-HAD-03", "roadName": "Hadadi to Vidyanagar Link", "lengthMeters": 1100, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+
+    { "id": "DE07", "from": "DVG-HAD-03", "to": "DVG-PJ-10", "roadName": "Court Road / PJ Extension", "lengthMeters": 900, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "local" },
+    { "id": "DE08", "from": "DVG-PJ-10", "to": "DVG-HAD-03", "roadName": "Court Road / PJ Extension", "lengthMeters": 900, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "local" },
+
+    { "id": "DE09", "from": "DVG-PJ-10", "to": "DVG-HEART-09", "roadName": "PJ Extension 4th Main", "lengthMeters": 250, "freeFlowSpeedKmh": 30, "lanes": 2, "roadClass": "local" },
+    { "id": "DE10", "from": "DVG-HEART-09", "to": "DVG-PJ-10", "roadName": "PJ Extension 4th Main", "lengthMeters": 250, "freeFlowSpeedKmh": 30, "lanes": 2, "roadClass": "local" },
+
+    { "id": "DE11", "from": "DVG-PJ-10", "to": "DVG-MCC-04", "roadName": "MCC Main Road", "lengthMeters": 950, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+    { "id": "DE12", "from": "DVG-MCC-04", "to": "DVG-PJ-10", "roadName": "MCC Main Road", "lengthMeters": 950, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+
+    { "id": "DE13", "from": "DVG-MCC-04", "to": "DVG-BAP-05", "roadName": "Bapuji Hospital Road", "lengthMeters": 500, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "hospital_access" },
+    { "id": "DE14", "from": "DVG-BAP-05", "to": "DVG-MCC-04", "roadName": "Bapuji Hospital Road", "lengthMeters": 500, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "hospital_access" },
+
+    { "id": "DE15", "from": "DVG-MCC-04", "to": "DVG-NH48-11", "roadName": "Shamanur Road to NH-48", "lengthMeters": 1800, "freeFlowSpeedKmh": 55, "lanes": 4, "roadClass": "arterial" },
+    { "id": "DE16", "from": "DVG-NH48-11", "to": "DVG-MCC-04", "roadName": "Shamanur Road to NH-48", "lengthMeters": 1800, "freeFlowSpeedKmh": 55, "lanes": 4, "roadClass": "arterial" },
+
+    { "id": "DE17", "from": "DVG-NH48-11", "to": "DVG-SSIMS-06", "roadName": "NH-48 Service Road to SSIMS", "lengthMeters": 1200, "freeFlowSpeedKmh": 60, "lanes": 4, "roadClass": "highway_corridor" },
+    { "id": "DE18", "from": "DVG-SSIMS-06", "to": "DVG-NH48-11", "roadName": "NH-48 Service Road to SSIMS", "lengthMeters": 1200, "freeFlowSpeedKmh": 60, "lanes": 4, "roadClass": "highway_corridor" },
+
+    { "id": "DE19", "from": "DVG-PB-02", "to": "DVG-CHIG-07", "roadName": "Old PB Road to Chigateri", "lengthMeters": 1200, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+    { "id": "DE20", "from": "DVG-CHIG-07", "to": "DVG-PB-02", "roadName": "Old PB Road to Chigateri", "lengthMeters": 1200, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+
+    { "id": "DE21", "from": "DVG-PB-02", "to": "DVG-CITY-08", "roadName": "Mandipet Main Road", "lengthMeters": 800, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "secondary" },
+    { "id": "DE22", "from": "DVG-CITY-08", "to": "DVG-PB-02", "roadName": "Mandipet Main Road", "lengthMeters": 800, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "secondary" }
+  ]
+}

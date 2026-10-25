@@ -1,0 +1,81 @@
+{
+  "networkId": "bengaluru-corridor-v1",
+  "name": "Bengaluru East-Central Emergency Road Network",
+  "bounds": {
+    "minLat": 12.9200,
+    "maxLat": 12.9900,
+    "minLng": 77.6000,
+    "maxLng": 77.7600
+  },
+  "nodes": [
+    { "id": "N-MG-01", "name": "MG Road Metro Station", "lat": 12.9756, "lng": 77.6066, "type": "junction" },
+    { "id": "N-TRI-02", "name": "Trinity Circle", "lat": 12.9729, "lng": 77.6174, "type": "roundabout" },
+    { "id": "N-HAL-03", "name": "Halasuru Lake Junction", "lat": 12.9772, "lng": 77.6254, "type": "junction" },
+    { "id": "N-CMH-04", "name": "CMH Road Entrance", "lat": 12.9790, "lng": 77.6320, "type": "junction" },
+    { "id": "N-IND-05", "name": "Indiranagar 100ft Rd / CMH Junction", "lat": 12.9784, "lng": 77.6408, "type": "junction" },
+    { "id": "N-IND-06", "name": "Indiranagar 12th Main", "lat": 12.9715, "lng": 77.6410, "type": "junction" },
+    { "id": "N-DOM-07", "name": "Domlur Flyover & Intermediate Ring Rd", "lat": 12.9608, "lng": 77.6415, "type": "flyover" },
+    { "id": "N-MAN-08", "name": "Manipal Hospital Junction", "lat": 12.9592, "lng": 77.6534, "type": "hospital_access" },
+    { "id": "N-APO-09", "name": "Apollo Medical Center Access", "lat": 12.9712, "lng": 77.6412, "type": "hospital_access" },
+    { "id": "N-OMR-10", "name": "Old Madras Road / Swami Vivekananda Metro", "lat": 12.9860, "lng": 77.6440, "type": "junction" },
+    { "id": "N-BYP-11", "name": "Kasturi Nagar Bypass", "lat": 12.9930, "lng": 77.6620, "type": "junction" },
+    { "id": "N-HAL-12", "name": "HAL Main Gate & Airport Corridor", "lat": 12.9575, "lng": 77.6710, "type": "junction" },
+    { "id": "N-MAR-13", "name": "Marathahalli Bridge & ORR Junction", "lat": 12.9562, "lng": 77.7011, "type": "flyover" },
+    { "id": "N-SAK-14", "name": "Sakra World Hospital Access (ORR)", "lat": 12.9260, "lng": 77.6837, "type": "hospital_access" },
+    { "id": "N-KUN-15", "name": "Kundalahalli Gate", "lat": 12.9645, "lng": 77.7180, "type": "junction" },
+    { "id": "N-VYD-16", "name": "Vydehi Hospital Access Road", "lat": 12.9767, "lng": 77.7289, "type": "hospital_access" },
+    { "id": "N-WHT-17", "name": "Whitefield Main Rd / City Care Access", "lat": 12.9698, "lng": 77.7499, "type": "hospital_access" }
+  ],
+  "edges": [
+    { "id": "E01", "from": "N-MG-01", "to": "N-TRI-02", "roadName": "MG Road", "lengthMeters": 1300, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+    { "id": "E02", "from": "N-TRI-02", "to": "N-MG-01", "roadName": "MG Road", "lengthMeters": 1300, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+    
+    { "id": "E03", "from": "N-TRI-02", "to": "N-HAL-03", "roadName": "Ulsoor Road", "lengthMeters": 1100, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+    { "id": "E04", "from": "N-HAL-03", "to": "N-TRI-02", "roadName": "Ulsoor Road", "lengthMeters": 1100, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+
+    { "id": "E05", "from": "N-HAL-03", "to": "N-CMH-04", "roadName": "CMH Road West", "lengthMeters": 1200, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "secondary" },
+    { "id": "E06", "from": "N-CMH-04", "to": "N-HAL-03", "roadName": "CMH Road West", "lengthMeters": 1200, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "secondary" },
+
+    { "id": "E07", "from": "N-CMH-04", "to": "N-IND-05", "roadName": "CMH Road East", "lengthMeters": 1000, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "secondary" },
+    { "id": "E08", "from": "N-IND-05", "to": "N-CMH-04", "roadName": "CMH Road East", "lengthMeters": 1000, "freeFlowSpeedKmh": 35, "lanes": 2, "roadClass": "secondary" },
+
+    { "id": "E09", "from": "N-IND-05", "to": "N-IND-06", "roadName": "100 Feet Road North", "lengthMeters": 800, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+    { "id": "E10", "from": "N-IND-06", "to": "N-IND-05", "roadName": "100 Feet Road North", "lengthMeters": 800, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+
+    { "id": "E11", "from": "N-IND-06", "to": "N-APO-09", "roadName": "12th Main Road", "lengthMeters": 200, "freeFlowSpeedKmh": 30, "lanes": 2, "roadClass": "local" },
+    { "id": "E12", "from": "N-APO-09", "to": "N-IND-06", "roadName": "12th Main Road", "lengthMeters": 200, "freeFlowSpeedKmh": 30, "lanes": 2, "roadClass": "local" },
+
+    { "id": "E13", "from": "N-IND-06", "to": "N-DOM-07", "roadName": "100 Feet Road South", "lengthMeters": 1300, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+    { "id": "E14", "from": "N-DOM-07", "to": "N-IND-06", "roadName": "100 Feet Road South", "lengthMeters": 1300, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "arterial" },
+
+    { "id": "E15", "from": "N-DOM-07", "to": "N-MAN-08", "roadName": "Old Airport Road West", "lengthMeters": 1400, "freeFlowSpeedKmh": 50, "lanes": 3, "roadClass": "primary_corridor" },
+    { "id": "E16", "from": "N-MAN-08", "to": "N-DOM-07", "roadName": "Old Airport Road West", "lengthMeters": 1400, "freeFlowSpeedKmh": 50, "lanes": 3, "roadClass": "primary_corridor" },
+
+    { "id": "E17", "from": "N-IND-05", "to": "N-OMR-10", "roadName": "Indiranagar 80ft Rd to OMR", "lengthMeters": 900, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+    { "id": "E18", "from": "N-OMR-10", "to": "N-IND-05", "roadName": "Indiranagar 80ft Rd to OMR", "lengthMeters": 900, "freeFlowSpeedKmh": 40, "lanes": 2, "roadClass": "secondary" },
+
+    { "id": "E19", "from": "N-OMR-10", "to": "N-BYP-11", "roadName": "Old Madras Road Highway", "lengthMeters": 2300, "freeFlowSpeedKmh": 60, "lanes": 4, "roadClass": "highway_corridor" },
+    { "id": "E20", "from": "N-BYP-11", "to": "N-OMR-10", "roadName": "Old Madras Road Highway", "lengthMeters": 2300, "freeFlowSpeedKmh": 60, "lanes": 4, "roadClass": "highway_corridor" },
+
+    { "id": "E21", "from": "N-MAN-08", "to": "N-HAL-12", "roadName": "HAL Old Airport Road", "lengthMeters": 2100, "freeFlowSpeedKmh": 50, "lanes": 3, "roadClass": "primary_corridor" },
+    { "id": "E22", "from": "N-HAL-12", "to": "N-MAN-08", "roadName": "HAL Old Airport Road", "lengthMeters": 2100, "freeFlowSpeedKmh": 50, "lanes": 3, "roadClass": "primary_corridor" },
+
+    { "id": "E23", "from": "N-HAL-12", "to": "N-MAR-13", "roadName": "HAL to Marathahalli Corridor", "lengthMeters": 3400, "freeFlowSpeedKmh": 50, "lanes": 3, "roadClass": "primary_corridor" },
+    { "id": "E24", "from": "N-MAR-13", "to": "N-HAL-12", "roadName": "HAL to Marathahalli Corridor", "lengthMeters": 3400, "freeFlowSpeedKmh": 50, "lanes": 3, "roadClass": "primary_corridor" },
+
+    { "id": "E25", "from": "N-MAR-13", "to": "N-SAK-14", "roadName": "Outer Ring Road South", "lengthMeters": 3500, "freeFlowSpeedKmh": 55, "lanes": 4, "roadClass": "arterial" },
+    { "id": "E26", "from": "N-SAK-14", "to": "N-MAR-13", "roadName": "Outer Ring Road South", "lengthMeters": 3500, "freeFlowSpeedKmh": 55, "lanes": 4, "roadClass": "arterial" },
+
+    { "id": "E27", "from": "N-MAR-13", "to": "N-KUN-15", "roadName": "Varthur Road to Kundalahalli", "lengthMeters": 2100, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "secondary" },
+    { "id": "E28", "from": "N-KUN-15", "to": "N-MAR-13", "roadName": "Varthur Road to Kundalahalli", "lengthMeters": 2100, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "secondary" },
+
+    { "id": "E29", "from": "N-BYP-11", "to": "N-KUN-15", "roadName": "Bypass Outer Radial Highway", "lengthMeters": 6800, "freeFlowSpeedKmh": 65, "lanes": 4, "roadClass": "highway_bypass" },
+    { "id": "E30", "from": "N-KUN-15", "to": "N-BYP-11", "roadName": "Bypass Outer Radial Highway", "lengthMeters": 6800, "freeFlowSpeedKmh": 65, "lanes": 4, "roadClass": "highway_bypass" },
+
+    { "id": "E31", "from": "N-KUN-15", "to": "N-VYD-16", "roadName": "ITPL Main Road", "lengthMeters": 1800, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "secondary" },
+    { "id": "E32", "from": "N-VYD-16", "to": "N-KUN-15", "roadName": "ITPL Main Road", "lengthMeters": 1800, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "secondary" },
+
+    { "id": "E33", "from": "N-KUN-15", "to": "N-WHT-17", "roadName": "Whitefield Main Road", "lengthMeters": 3600, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "primary_corridor" },
+    { "id": "E34", "from": "N-WHT-17", "to": "N-KUN-15", "roadName": "Whitefield Main Road", "lengthMeters": 3600, "freeFlowSpeedKmh": 45, "lanes": 3, "roadClass": "primary_corridor" }
+  ]
+}

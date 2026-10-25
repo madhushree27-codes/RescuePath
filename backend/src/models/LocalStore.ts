@@ -1,0 +1,375 @@
+import { ITrip } from "./Trip";
+import { IHospital } from "./Hospital";
+
+export interface ITrafficIncident {
+  id: string;
+  roadName: string;
+  severity: "LOW" | "MODERATE" | "HEAVY_CONGESTION" | "COMPLETE_BLOCK";
+  delayFactor: number;
+  description: string;
+  lat: number;
+  lng: number;
+  active: boolean;
+  reportedAt: string;
+}
+
+function haversine(lat1: number, lon1: number, lat2: number, lon2: number): number {
+  const R = 6371; // km
+  const dLat = ((lat2 - lat1) * Math.PI) / 180;
+  const dLon = ((lon2 - lon1) * Math.PI) / 180;
+  const a =
+    Math.sin(dLat / 2) * Math.sin(dLat / 2) +
+    Math.cos((lat1 * Math.PI) / 180) *
+      Math.cos((lat2 * Math.PI) / 180) *
+      Math.sin(dLon / 2) *
+      Math.sin(dLon / 2);
+  const c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
+  return R * c;
+}
+
+const SEED_HOSPITALS: IHospital[] = [
+  // --- Davanagere District Regional Hospitals ---
+  {
+    id: "HOSP-DVG-001",
+    name: "Bapuji Hospital & Research Centre",
+    address: "MCC B Block, Kuvempu Nagar, Davanagere, Karnataka 577004",
+    lat: 14.4720,
+    lng: 75.9080,
+    nearestNodeId: "DVG-BAP-05",
+    contactPhone: "+91-8192-284100",
+    traumaLevel: "LEVEL_1",
+    rating: 4.8,
+    capacity: {
+      totalEmergencyBeds: 45,
+      availableEmergencyBeds: 12,
+      totalIcuBeds: 50,
+      availableIcuBeds: 14,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: true,
+      neurologyStroke: true,
+      pediatricEmergency: true,
+      burnCare: true,
+      cathLabAvailable: true
+    }
+  },
+  {
+    id: "HOSP-DVG-002",
+    name: "SS Institute of Medical Sciences & RC (SSIMS)",
+    address: "NH-48 Bypass Road, Shamanur, Davanagere, Karnataka 577005",
+    lat: 14.4850,
+    lng: 75.8920,
+    nearestNodeId: "DVG-SSIMS-06",
+    contactPhone: "+91-8192-261807",
+    traumaLevel: "LEVEL_1",
+    rating: 4.9,
+    capacity: {
+      totalEmergencyBeds: 60,
+      availableEmergencyBeds: 18,
+      totalIcuBeds: 75,
+      availableIcuBeds: 22,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: true,
+      neurologyStroke: true,
+      pediatricEmergency: true,
+      burnCare: true,
+      cathLabAvailable: true
+    }
+  },
+  {
+    id: "HOSP-DVG-003",
+    name: "Chigateri District General Hospital",
+    address: "Hospital Road, Davanagere, Karnataka 577001",
+    lat: 14.4530,
+    lng: 75.9230,
+    nearestNodeId: "DVG-CHIG-07",
+    contactPhone: "+91-8192-230400",
+    traumaLevel: "LEVEL_2",
+    rating: 4.2,
+    capacity: {
+      totalEmergencyBeds: 30,
+      availableEmergencyBeds: 8,
+      totalIcuBeds: 25,
+      availableIcuBeds: 6,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: false,
+      traumaSurgery: true,
+      neurologyStroke: false,
+      pediatricEmergency: true,
+      burnCare: true,
+      cathLabAvailable: false
+    }
+  },
+  {
+    id: "HOSP-DVG-004",
+    name: "City Central Hospital",
+    address: "Mandipet Main Road, Davanagere, Karnataka 577001",
+    lat: 14.4625,
+    lng: 75.9250,
+    nearestNodeId: "DVG-CITY-08",
+    contactPhone: "+91-8192-255123",
+    traumaLevel: "LEVEL_2",
+    rating: 4.3,
+    capacity: {
+      totalEmergencyBeds: 18,
+      availableEmergencyBeds: 5,
+      totalIcuBeds: 15,
+      availableIcuBeds: 4,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: false,
+      neurologyStroke: false,
+      pediatricEmergency: true,
+      burnCare: false,
+      cathLabAvailable: false
+    }
+  },
+  {
+    id: "HOSP-DVG-005",
+    name: "Davanagere Heart & Brain Center",
+    address: "PJ Extension, 4th Main, Davanagere, Karnataka 577002",
+    lat: 14.4650,
+    lng: 75.9140,
+    nearestNodeId: "DVG-HEART-09",
+    contactPhone: "+91-8192-270888",
+    traumaLevel: "LEVEL_2",
+    rating: 4.7,
+    capacity: {
+      totalEmergencyBeds: 20,
+      availableEmergencyBeds: 6,
+      totalIcuBeds: 25,
+      availableIcuBeds: 7,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: false,
+      neurologyStroke: true,
+      pediatricEmergency: false,
+      burnCare: false,
+      cathLabAvailable: true
+    }
+  },
+
+  // --- Bengaluru Central & East Corridor Hospitals ---
+  {
+    id: "HOSP-001",
+    name: "Manipal Hospital, Old Airport Road",
+    address: "98, HAL Old Airport Rd, Kodihalli, Bengaluru, Karnataka 560017",
+    lat: 12.9592,
+    lng: 77.6534,
+    nearestNodeId: "N-MAN-08",
+    contactPhone: "+91-80-2502-4444",
+    traumaLevel: "LEVEL_1",
+    rating: 4.8,
+    capacity: {
+      totalEmergencyBeds: 35,
+      availableEmergencyBeds: 8,
+      totalIcuBeds: 60,
+      availableIcuBeds: 12,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: true,
+      neurologyStroke: true,
+      pediatricEmergency: true,
+      burnCare: true,
+      cathLabAvailable: true
+    }
+  },
+  {
+    id: "HOSP-002",
+    name: "Apollo Medical Center, Indiranagar",
+    address: "12th Main Rd, HAL 2nd Stage, Indiranagar, Bengaluru, Karnataka 560038",
+    lat: 12.9712,
+    lng: 77.6412,
+    nearestNodeId: "N-APO-09",
+    contactPhone: "+91-80-4030-4050",
+    traumaLevel: "LEVEL_2",
+    rating: 4.6,
+    capacity: {
+      totalEmergencyBeds: 15,
+      availableEmergencyBeds: 4,
+      totalIcuBeds: 20,
+      availableIcuBeds: 5,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: false,
+      neurologyStroke: false,
+      pediatricEmergency: true,
+      burnCare: false,
+      cathLabAvailable: true
+    }
+  },
+  {
+    id: "HOSP-003",
+    name: "Sakra World Hospital, Marathahalli ORR",
+    address: "SY No. 52/2 & 52/3, Devarabeesanahalli, Varthur Hobli, Bengaluru 560103",
+    lat: 12.9260,
+    lng: 77.6837,
+    nearestNodeId: "N-SAK-14",
+    contactPhone: "+91-80-4969-4969",
+    traumaLevel: "LEVEL_1",
+    rating: 4.7,
+    capacity: {
+      totalEmergencyBeds: 25,
+      availableEmergencyBeds: 6,
+      totalIcuBeds: 45,
+      availableIcuBeds: 7,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: true,
+      neurologyStroke: true,
+      pediatricEmergency: true,
+      burnCare: false,
+      cathLabAvailable: true
+    }
+  },
+  {
+    id: "HOSP-004",
+    name: "Vydehi Institute of Medical Sciences",
+    address: "82 EPIP Area, Whitefield, Bengaluru, Karnataka 560066",
+    lat: 12.9767,
+    lng: 77.7289,
+    nearestNodeId: "N-VYD-16",
+    contactPhone: "+91-80-4906-9000",
+    traumaLevel: "LEVEL_1",
+    rating: 4.5,
+    capacity: {
+      totalEmergencyBeds: 40,
+      availableEmergencyBeds: 14,
+      totalIcuBeds: 70,
+      availableIcuBeds: 18,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: true,
+      neurologyStroke: true,
+      pediatricEmergency: true,
+      burnCare: true,
+      cathLabAvailable: true
+    }
+  },
+  {
+    id: "HOSP-005",
+    name: "City Care Hospital, Whitefield",
+    address: "Whitefield Main Rd, Bengaluru, Karnataka 560066",
+    lat: 12.9698,
+    lng: 77.7499,
+    nearestNodeId: "N-WHT-17",
+    contactPhone: "+91-80-2845-6677",
+    traumaLevel: "LEVEL_2",
+    rating: 4.3,
+    capacity: {
+      totalEmergencyBeds: 18,
+      availableEmergencyBeds: 5,
+      totalIcuBeds: 22,
+      availableIcuBeds: 4,
+      status: "OPEN"
+    },
+    specialties: {
+      cardiology: true,
+      traumaSurgery: true,
+      neurologyStroke: false,
+      pediatricEmergency: true,
+      burnCare: false,
+      cathLabAvailable: false
+    }
+  }
+];
+
+class LocalStore {
+  private trips: Map<string, ITrip> = new Map();
+  private hospitals: Map<string, IHospital> = new Map();
+  private incidents: Map<string, ITrafficIncident> = new Map();
+
+  constructor() {
+    for (const h of SEED_HOSPITALS) {
+      this.hospitals.set(h.id, h);
+    }
+  }
+
+  saveTrip(trip: ITrip): ITrip {
+    this.trips.set(trip.id, trip);
+    return trip;
+  }
+
+  getTrip(id: string): ITrip | undefined {
+    return this.trips.get(id);
+  }
+
+  listTrips(): ITrip[] {
+    return Array.from(this.trips.values()).sort(
+      (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime()
+    );
+  }
+
+  updateTrip(id: string, updates: Partial<ITrip>): ITrip | undefined {
+    const existing = this.trips.get(id);
+    if (!existing) return undefined;
+    const updated = { ...existing, ...updates };
+    this.trips.set(id, updated);
+    return updated;
+  }
+
+  // Returns hospitals prioritized/filtered by distance to reference coordinates
+  getHospitals(refLat?: number, refLng?: number): IHospital[] {
+    const all = Array.from(this.hospitals.values());
+    if (refLat == null || refLng == null) {
+      return all;
+    }
+
+    // Sort by geographical proximity
+    const withDist = all.map((h) => ({
+      hospital: h,
+      dist: haversine(refLat, refLng, h.lat, h.lng)
+    }));
+
+    withDist.sort((a, b) => a.dist - b.dist);
+
+    // Filter to those within 50km, or take top 5 closest
+    const nearby = withDist.filter((item) => item.dist <= 60).map((item) => item.hospital);
+    if (nearby.length >= 2) {
+      return nearby;
+    }
+    return withDist.slice(0, 5).map((item) => item.hospital);
+  }
+
+  getHospital(id: string): IHospital | undefined {
+    return this.hospitals.get(id);
+  }
+
+  getIncidents(): ITrafficIncident[] {
+    return Array.from(this.incidents.values()).filter((inc) => inc.active);
+  }
+
+  addIncident(inc: ITrafficIncident): ITrafficIncident {
+    this.incidents.set(inc.id, inc);
+    return inc;
+  }
+
+  removeIncident(id: string): boolean {
+    const inc = this.incidents.get(id);
+    if (!inc) return false;
+    inc.active = false;
+    this.incidents.set(id, inc);
+    return true;
+  }
+}
+
+export const localStore = new LocalStore();
