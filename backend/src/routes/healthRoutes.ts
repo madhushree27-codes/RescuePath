@@ -7,7 +7,7 @@ const router = Router();
 router.get("/", async (req: Request, res: Response) => {
   let pythonStatus = "OFFLINE";
   try {
-    const pyRes = await axios.get(`${config.ROUTING_SERVICE_URL}/health`, { timeout: 1500 });
+    const pyRes = await axios.get(`${config.ROUTING_SERVICE_URL}/health`, { timeout: 10000 });
     if (pyRes.status === 200) pythonStatus = "HEALTHY";
   } catch (err: any) {
     pythonStatus = "DISCONNECTED";
